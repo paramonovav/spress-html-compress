@@ -14,5 +14,5 @@
     "require": {
         "spress/spress-installer": "2.0.*",
         "wyrihaximus/html-compress": "^1.1"
-    },
+    }
 }
