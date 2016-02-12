@@ -9,11 +9,12 @@ use Yosymfony\Spress\Core\Plugin\Event\RenderEvent;
 
 class ParamonovavSpressHtmlCompress implements PluginInterface
 {
-    private $io;
+    private $io, $html_compress_exclude = ['.htaccess','robots.txt','crossdomain.xml', 'sitemap.xml', 'rss.xml'];
 
     public function initialize(EventSubscriber $subscriber)
     {
-        $subscriber->addEventListener('spress.after_render_page', 'onAfterRenderPage');
+        $subscriber-> addEventListener('spress.start', 'onStart');
+        $subscriber-> addEventListener('spress.after_render_page', 'onAfterRenderPage');
     }
 
     public function getMetas()
@@ -25,19 +26,30 @@ class ParamonovavSpressHtmlCompress implements PluginInterface
             'license' => 'MIT',
         ];
     }
+
+    public function onStart(EnvironmentEvent $event)
+    {
+        $this-> io = $event-> getIO();
+
+        $configValues = $event-> getConfigValues();
+
+        if(isset($configValues['html_compress_exclude']))
+        {
+            $this->html_compress_exclude = $configValues['html_compress_exclude'];
+        }
+    }
     
     public function onAfterRenderPage(RenderEvent $event)
     {
-        $content = $event->getContent();
+        $id = $event-> getId();
 
-        $parser = \WyriHaximus\HtmlCompress\Factory::construct();
-        $compressedHtml = $parser->compress($content);        
+        if (in_array($id, $this-> html_compress_exclude) || preg_match('/(.*)?\.(jpe?g|png|gif|ico|svg|psd|tiff|webm|mov|avi|mkv)$/i', $id))
+        {
+            return;
+        }
 
-        $event->setContent($compressedHtml);
-    }
+        $this-> io-> write('Minify/Compress html: '.$event-> getId());
 
-    public function onFinish(FinishEvent $event)
-    {
-
+        $event-> setContent( \WyriHaximus\HtmlCompress\Factory::construct()-> compress( $event-> getContent() ) );
     }
 }
