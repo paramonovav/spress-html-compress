@@ -43,7 +43,7 @@ class ParamonovavSpressHtmlCompress implements PluginInterface
     {
         $id = $event-> getId();
 
-        if (in_array($id, $this-> html_compress_exclude) || preg_match('/(.*)?\.(jpe?g|png|gif|ico|svg|psd|tiff|webm|mov|avi|mkv)$/i', $id))
+        if (in_array($id, $this-> html_compress_exclude) || preg_match('/(.*)?\.(jpe?g|png|gif|ico|svg|psd|tiff|webm|mov|avi|mkv|mp4)$/i', $id))
         {
             return;
         }
