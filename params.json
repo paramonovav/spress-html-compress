@@ -1,0 +1,6 @@
+{
+  "name": "Spress html compress",
+  "tagline": "Compress/minify your HTML",
+  "body": "## Minify HTML\r\n\r\n![Spress 2 ready](https://img.shields.io/badge/Spress%202-ready-brightgreen.svg)\r\n\r\nCompress/minify your HTML\r\n\r\n### How to install?\r\n\r\nGo to your Spress site and add the following to your `composer.json` and run \r\n`composer update`:\r\n\r\n```json\r\n\"require\": {\r\n    \"paramonovav/spress-html-compress\": \"2.0.*\"\r\n}\r\n```\r\n\r\n### How to use?\r\n\r\nAdd the following to your config.yml to exclude some files from minify/compress process:\r\n\r\n```yaml\r\nhtml_compress_exclude: ['.htaccess','robots.txt','crossdomain.xml', 'sitemap.xml','nortonsw_bc7be3d0-796e-0.html','BingSiteAuth.xml']\r\n```\r\n\r\nJust run build command:\r\n\r\n```bash\r\nspress site:build\r\n```\r\n",
+  "note": "Don't delete this file! It's used internally to help with page regeneration."
+}

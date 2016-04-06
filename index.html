@@ -1,0 +1,67 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Spress html compress by paramonovav</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/github-light.css">
+    <meta name="viewport" content="width=device-width">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Spress html compress</h1>
+        <p>Compress/minify your HTML</p>
+
+        <p class="view"><a href="https://github.com/paramonovav/spress-html-compress">View the Project on GitHub <small>paramonovav/spress-html-compress</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/paramonovav/spress-html-compress/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/paramonovav/spress-html-compress/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/paramonovav/spress-html-compress">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h2>
+<a id="minify-html" class="anchor" href="#minify-html" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Minify HTML</h2>
+
+<p><img src="https://img.shields.io/badge/Spress%202-ready-brightgreen.svg" alt="Spress 2 ready"></p>
+
+<p>Compress/minify your HTML</p>
+
+<h3>
+<a id="how-to-install" class="anchor" href="#how-to-install" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>How to install?</h3>
+
+<p>Go to your Spress site and add the following to your <code>composer.json</code> and run 
+<code>composer update</code>:</p>
+
+<div class="highlight highlight-source-json"><pre><span class="pl-s"><span class="pl-pds">"</span>require<span class="pl-pds">"</span></span>: {
+    <span class="pl-s"><span class="pl-pds">"</span>paramonovav/spress-html-compress<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>2.0.*<span class="pl-pds">"</span></span>
+}</pre></div>
+
+<h3>
+<a id="how-to-use" class="anchor" href="#how-to-use" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>How to use?</h3>
+
+<p>Add the following to your config.yml to exclude some files from minify/compress process:</p>
+
+<div class="highlight highlight-source-yaml"><pre><span class="pl-s"><span class="pl-ent">html_compress_exclude:</span> <span class="pl-s">['.htaccess','robots.txt','crossdomain.xml', 'sitemap.xml','nortonsw_bc7be3d0-796e-0.html','BingSiteAuth.xml']</span></span></pre></div>
+
+<p>Just run build command:</p>
+
+<div class="highlight highlight-source-shell"><pre>spress site:build</pre></div>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/paramonovav">paramonovav</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
