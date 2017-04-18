@@ -21,6 +21,7 @@ Add the following to your config.yml to exclude some files from minify/compress 
 
 ```yaml
 html_compress_exclude: ['.htaccess','robots.txt','crossdomain.xml', 'sitemap.xml','nortonsw_bc7be3d0-796e-0.html','BingSiteAuth.xml']
+html_compress_exclude_pattern: '/(.*)?\.(jpe?g|png|gif|ico|svg|psd|tiff|webm|mov|avi|mkv|mp4|eot|ttf|otf|woff|woff2|webp)$/i'
 ```
 
 Just run build command:
