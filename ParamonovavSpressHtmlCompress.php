@@ -11,6 +11,8 @@ class ParamonovavSpressHtmlCompress implements PluginInterface
 {
     private $io, $html_compress_exclude = ['.htaccess','robots.txt','crossdomain.xml', 'sitemap.xml', 'rss.xml'];
 
+    private $html_compress_exclude_pattern = '/(.*)?\.(jpe?g|png|gif|ico|svg|psd|tiff|webm|mov|avi|mkv|mp4)$/i';
+
     public function initialize(EventSubscriber $subscriber)
     {
         $subscriber-> addEventListener('spress.start', 'onStart');
@@ -37,13 +39,19 @@ class ParamonovavSpressHtmlCompress implements PluginInterface
         {
             $this->html_compress_exclude = $configValues['html_compress_exclude'];
         }
+
+        if(isset($configValues['html_compress_exclude_pattern']))
+        {
+            $this->html_compress_exclude_pattern = $configValues['html_compress_exclude_pattern'];
+        }
+
     }
     
     public function onAfterRenderPage(RenderEvent $event)
     {
         $id = $event-> getId();
 
-        if (in_array($id, $this-> html_compress_exclude) || preg_match('/(.*)?\.(jpe?g|png|gif|ico|svg|psd|tiff|webm|mov|avi|mkv|mp4)$/i', $id))
+        if (in_array($id, $this-> html_compress_exclude) || preg_match($this->html_compress_exclude_pattern, $id))
         {
             return;
         }
