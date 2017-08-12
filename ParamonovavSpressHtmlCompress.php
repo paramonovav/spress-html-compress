@@ -3,20 +3,32 @@
 use Yosymfony\Spress\Core\Plugin\PluginInterface;
 use Yosymfony\Spress\Core\Plugin\EventSubscriber;
 use Yosymfony\Spress\Core\Plugin\Event\EnvironmentEvent;
-use Yosymfony\Spress\Core\Plugin\Event\ContentEvent;
-use Yosymfony\Spress\Core\Plugin\Event\FinishEvent;
 use Yosymfony\Spress\Core\Plugin\Event\RenderEvent;
+use Yosymfony\Spress\Core\IO\IOInterface;
 
 class ParamonovavSpressHtmlCompress implements PluginInterface
 {
-    private $io, $html_compress_exclude = ['.htaccess','robots.txt','crossdomain.xml', 'sitemap.xml', 'rss.xml'];
+    /** @var IOInterface */
+    private $io;
 
+    /** @var string[] */
+    private $html_compress_exclude = ['.htaccess','robots.txt','crossdomain.xml', 'sitemap.xml', 'rss.xml'];
+
+    /** @var bool */
+    private $htmlCompress  = true;
+
+    /**
+     * @param EventSubscriber $subscriber
+     */
     public function initialize(EventSubscriber $subscriber)
     {
-        $subscriber-> addEventListener('spress.start', 'onStart');
-        $subscriber-> addEventListener('spress.after_render_page', 'onAfterRenderPage');
+        $subscriber->addEventListener('spress.start', 'onStart');
+        $subscriber->addEventListener('spress.after_render_page', 'onAfterRenderPage');
     }
 
+    /**
+     * @return string[]
+     */
     public function getMetas()
     {
         return [
@@ -27,29 +39,37 @@ class ParamonovavSpressHtmlCompress implements PluginInterface
         ];
     }
 
+    /**
+     * @param EnvironmentEvent $event
+     */
     public function onStart(EnvironmentEvent $event)
     {
-        $this-> io = $event-> getIO();
+        $this->io = $event->getIO();
 
-        $configValues = $event-> getConfigValues();
+        $configValues = $event->getConfigValues();
+
+        $this->htmlCompress = !empty($configValues['html_compress']);
 
         if(isset($configValues['html_compress_exclude']))
         {
             $this->html_compress_exclude = $configValues['html_compress_exclude'];
         }
     }
-    
+
+    /**
+     * @param RenderEvent $event
+     */
     public function onAfterRenderPage(RenderEvent $event)
     {
-        $id = $event-> getId();
 
-        if (in_array($id, $this-> html_compress_exclude) || preg_match('/(.*)?\.(jpe?g|png|gif|ico|svg|psd|tiff|webm|mov|avi|mkv|mp4)$/i', $id))
-        {
+        $id = $event->getId();
+
+        if (!$this->htmlCompress || in_array($id, $this->html_compress_exclude, true) || preg_match('/(.*)?\.(jpe?g|png|gif|ico|svg|psd|tiff|webm|mov|avi|mkv|mp4)$/i', $id)) {
             return;
         }
 
-        $this-> io-> write('Minify/Compress html: '.$event-> getId());
+        $this->io->write('Minify/Compress html: '.$event->getId());
 
-        $event-> setContent( \WyriHaximus\HtmlCompress\Factory::construct()-> compress( $event-> getContent() ) );
+        $event->setContent( \WyriHaximus\HtmlCompress\Factory::construct()->compress( $event->getContent() ) );
     }
 }
