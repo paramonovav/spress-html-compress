@@ -1,5 +1,5 @@
 ## Minify HTML
-
+[![Latest Stable Version](https://poser.pugx.org/paramonovav/spress-html-compress/v)](//packagist.org/packages/paramonovav/spress-html-compress) [![Total Downloads](https://poser.pugx.org/paramonovav/spress-html-compress/downloads)](//packagist.org/packages/paramonovav/spress-html-compress) [![Latest Unstable Version](https://poser.pugx.org/paramonovav/spress-html-compress/v/unstable)](//packagist.org/packages/paramonovav/spress-html-compress) [![License](https://poser.pugx.org/paramonovav/spress-html-compress/license)](//packagist.org/packages/paramonovav/spress-html-compress)
 ![Spress 2 ready](https://img.shields.io/badge/Spress%202-ready-brightgreen.svg)
 
 Compress/minify your HTML
