@@ -29,3 +29,9 @@ Just run build command:
 ```bash
 spress site:build
 ```
+
+If you want to disable compression use the following config
+
+```yaml
+html_compress: false
+```
